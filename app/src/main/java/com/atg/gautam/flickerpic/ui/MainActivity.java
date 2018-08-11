@@ -1,7 +1,9 @@
-package com.atg.gautam.flickerpic;
+package com.atg.gautam.flickerpic.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.atg.gautam.flickerpic.R;
 
 public class MainActivity extends AppCompatActivity {
 

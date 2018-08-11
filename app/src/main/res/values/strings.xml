@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">FlickerPic</string>
+    <string name="app_name">FlickrPic</string>
+    <string name="Splash_CD">Splash Screen with app icon</string>
 </resources>
