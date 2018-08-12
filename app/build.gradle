@@ -16,6 +16,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildTypes.each {
+        it.buildConfigField 'String', 'FLICKR_API_TOKEN', MyAPIKey
+    }
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8

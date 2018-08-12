@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView mBottomNavigationView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,8 +21,7 @@ public class MainActivity extends AppCompatActivity {
         mBottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.recent_images:
-                    RecentFragment mRecentFragment = new RecentFragment();
-                    mFragmentManager.beginTransaction().replace(R.id.fragment_container, mRecentFragment).commit();
+                    // do something;
                     break;
                 case R.id.search_images:
                     //do something;
@@ -30,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+        RecentFragment mRecentFragment = new RecentFragment();
+        mFragmentManager.beginTransaction().replace(R.id.fragment_container, mRecentFragment).commit();
         mBottomNavigationView.setSelectedItemId(R.id.recent_images);
+
     }
+
+
 }

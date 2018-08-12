@@ -10,14 +10,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.atg.gautam.flickerpic.R;
+import com.atg.gautam.flickerpic.utills.GlideApp;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+
+import java.util.ArrayList;
 
 /*
  ** Created by Gautam Krishnan {@link https://github.com/GautiKrish}
  */public class ImagesRecyclerViewAdapter extends RecyclerView.Adapter<ImagesRecyclerViewAdapter.ImagesViewHolder> {
     private Context mContext;
+    private ArrayList<String> mImageURLArrayList;
+    private ArrayList<String> mImageIdArrayList;
 
-    public ImagesRecyclerViewAdapter(Context mContext) {
+    public ImagesRecyclerViewAdapter(Context mContext, ArrayList<String> mImageURLArrayList, ArrayList<String> mImageIdArrayList) {
         this.mContext = mContext;
+        this.mImageURLArrayList = mImageURLArrayList;
+        this.mImageIdArrayList = mImageIdArrayList;
 
     }
 
@@ -31,12 +39,17 @@ import com.atg.gautam.flickerpic.R;
 
     @Override
     public void onBindViewHolder(@NonNull ImagesViewHolder holder, int position) {
-
+        GlideApp.with(mContext)
+                .load(mImageURLArrayList.get(position))
+                .centerCrop()
+                .transition(new DrawableTransitionOptions().crossFade())
+                .into(holder.mImageView);
+        holder.mTextView.setText(mImageIdArrayList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return mImageIdArrayList.size();
     }
 
     public class ImagesViewHolder extends RecyclerView.ViewHolder {
