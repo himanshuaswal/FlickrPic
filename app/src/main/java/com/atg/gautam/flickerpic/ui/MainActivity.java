@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.atg.gautam.flickerpic.R;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView mBottomNavigationView;
@@ -15,10 +16,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mBottomNavigationView = findViewById(R.id.bottom_navigation);
+        android.support.v4.app.FragmentManager mFragmentManager = getSupportFragmentManager();
         mBottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.recent_images:
-                    //do something;
+                    RecentFragment mRecentFragment = new RecentFragment();
+                    mFragmentManager.beginTransaction().replace(R.id.fragment_container, mRecentFragment).commit();
                     break;
                 case R.id.search_images:
                     //do something;
@@ -27,5 +30,6 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+        mBottomNavigationView.setSelectedItemId(R.id.recent_images);
     }
 }
