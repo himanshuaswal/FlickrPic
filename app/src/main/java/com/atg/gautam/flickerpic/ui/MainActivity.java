@@ -3,8 +3,11 @@ package com.atg.gautam.flickerpic.ui;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 
 import com.atg.gautam.flickerpic.R;
+
+import org.aviran.cookiebar2.CookieBar;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -33,7 +36,11 @@ public class MainActivity extends AppCompatActivity {
         RecentFragment mRecentFragment = new RecentFragment();
         mFragmentManager.beginTransaction().replace(R.id.fragment_container, mRecentFragment).commit();
         mBottomNavigationView.setSelectedItemId(R.id.recent_images);
-
+        CookieBar.build(MainActivity.this)
+                .setLayoutGravity(Gravity.BOTTOM)
+                .setBackgroundColor(android.R.color.holo_orange_dark)
+                .setTitle("App developed by Gautam Krishnan")
+                .show();
     }
 
 

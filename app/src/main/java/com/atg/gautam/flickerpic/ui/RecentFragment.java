@@ -61,7 +61,6 @@ import retrofit2.Response;
             columns = 4;
         mGridLayoutManager = new GridLayoutManager(getActivity(), columns);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
-        Log.i("No of images",String.valueOf(imageURLArrayList.size()));
         mImagesRecyclerViewAdapter = new ImagesRecyclerViewAdapter(getActivity(), imageURLArrayList, imageIdArrayList);
         mRecyclerView.setAdapter(mImagesRecyclerViewAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -86,7 +85,6 @@ import retrofit2.Response;
                         imageURLArrayList.add(image.getImageUrl());
                         imageIdArrayList.add(image.getId());
                     }
-                    Log.i("No. of images in AL", String.valueOf(imageURLArrayList.size()));
                     mImagesRecyclerViewAdapter.notifyDataSetChanged();
                 }
                 mRecyclerView.setVisibility(View.VISIBLE);
