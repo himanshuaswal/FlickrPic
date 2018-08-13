@@ -49,7 +49,10 @@ import java.util.ArrayList;
 
     @Override
     public int getItemCount() {
-        return mImageIdArrayList.size();
+        if(mImageIdArrayList!=null)
+            return mImageIdArrayList.size();
+        else
+            return 0;
     }
 
     public class ImagesViewHolder extends RecyclerView.ViewHolder {

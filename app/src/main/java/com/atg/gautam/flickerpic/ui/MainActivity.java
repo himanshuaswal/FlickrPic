@@ -1,5 +1,7 @@
 package com.atg.gautam.flickerpic.ui;
 
+import android.app.SearchManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
                     // do something;
                     break;
                 case R.id.search_images:
-                    //do something;
+                    onSearchRequested();
                     break;
 
             }
@@ -41,6 +43,14 @@ public class MainActivity extends AppCompatActivity {
                 .setBackgroundColor(android.R.color.holo_orange_dark)
                 .setTitle("App developed by Gautam Krishnan")
                 .show();
+        Intent intent = getIntent();
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            doMySearch(query);
+        }
+    }
+
+    private void doMySearch(String query) {
     }
 
 

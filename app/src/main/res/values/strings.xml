@@ -3,5 +3,5 @@
     <string name="Splash_CD">Splash Screen with app icon</string>
     <string name="image_thumbnail">Recent images of Flickr</string>
     <string name="image_id">Image Id</string>
-    <string name="search_hint">Search for cats, dogs</string>
+    <string name="search_hint">Search</string>
 </resources>
