@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.atg.gautam.flickerpic.BuildConfig;
 import com.atg.gautam.flickerpic.R;
-import com.atg.gautam.flickerpic.adapters.RecentImagesRecyclerViewAdapter;
+import com.atg.gautam.flickerpic.adapters.QueryImagesRecyclerViewAdapter;
 import com.atg.gautam.flickerpic.model.FlickrResponse;
 import com.atg.gautam.flickerpic.model.Image;
 import com.atg.gautam.flickerpic.model.Images;
@@ -32,45 +32,59 @@ import retrofit2.Response;
 
 /*
  ** Created by Gautam Krishnan {@link https://github.com/GautiKrish}
- */public class RecentFragment extends Fragment {
-    private String METHOD_NAME = "flickr.photos.getRecent";
+ */public class QueryFragment extends Fragment {
+    private static String METHOD_NAME = "flickr.photos.search";
     private static String FORMAT = "json";
     private static int NO_JSON_CALL_BACK = 1;
     private static String EXTRAS = "url_s";
-    private GridLayoutManager mGridLayoutManager;
-    private RecentImagesRecyclerViewAdapter mRecentImagesRecyclerViewAdapter;
+    private String TEXT = "";
     private RecyclerView mRecyclerView;
     private ProgressBar mProgressBar;
+    private GridLayoutManager mGridLayoutManager;
+    private QueryImagesRecyclerViewAdapter mQueryImagesRecyclerViewAdapter;
     private ArrayList<String> imageURLArrayList = new ArrayList<>();
     private ArrayList<String> imageIdArrayList = new ArrayList<>();
 
-    public RecentFragment() {
 
+    public static QueryFragment newInstance(String query) {
+        Bundle bundle = new Bundle();
+        bundle.putString("query", query);
+        QueryFragment fragment = new QueryFragment();
+        fragment.setArguments(bundle);
+
+        return fragment;
+    }
+
+    private void readBundle(Bundle bundle) {
+        if (bundle != null) {
+            TEXT = bundle.getString("query");
+        }
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_recent, container, false);
-        mRecyclerView = rootView.findViewById(R.id.rv_recent_images);
-        mProgressBar = rootView.findViewById(R.id.loading_recent_indicator);
-        fetchRecentImages();
+        View rootView = inflater.inflate(R.layout.fragment_query, container, false);
+        mRecyclerView = rootView.findViewById(R.id.rv_query_images);
+        mProgressBar = rootView.findViewById(R.id.loading_query_indicator);
+        readBundle(getArguments());
+        fetchQueryImages();
         int columns = 2;
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
             columns = 4;
         mGridLayoutManager = new GridLayoutManager(getActivity(), columns);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
-        mRecentImagesRecyclerViewAdapter = new RecentImagesRecyclerViewAdapter(getActivity(), imageURLArrayList, imageIdArrayList);
-        mRecyclerView.setAdapter(mRecentImagesRecyclerViewAdapter);
+        mQueryImagesRecyclerViewAdapter = new QueryImagesRecyclerViewAdapter(getActivity(), imageURLArrayList, imageIdArrayList);
+        mRecyclerView.setAdapter(mQueryImagesRecyclerViewAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         return rootView;
     }
 
-    private void fetchRecentImages() {
+    private void fetchQueryImages() {
         mRecyclerView.setVisibility(View.INVISIBLE);
         mProgressBar.setVisibility(View.VISIBLE);
         RetrofitAPI retrofitAPI = NetworkUtils.getCacheEnabledRetrofit(getActivity()).create(RetrofitAPI.class);
-        Call<FlickrResponse> call = retrofitAPI.getImages(METHOD_NAME, BuildConfig.FLICKR_API_TOKEN, FORMAT, NO_JSON_CALL_BACK, EXTRAS);
+        Call<FlickrResponse> call = retrofitAPI.getSearchQueryImages(METHOD_NAME, BuildConfig.FLICKR_API_TOKEN, FORMAT, NO_JSON_CALL_BACK, EXTRAS, TEXT);
         call.enqueue(new Callback<FlickrResponse>() {
             @Override
             public void onResponse(Call<FlickrResponse> call, Response<FlickrResponse> response) {
@@ -84,7 +98,7 @@ import retrofit2.Response;
                         imageURLArrayList.add(image.getImageUrl());
                         imageIdArrayList.add(image.getId());
                     }
-                    mRecentImagesRecyclerViewAdapter.notifyDataSetChanged();
+                    mQueryImagesRecyclerViewAdapter.notifyDataSetChanged();
                 }
                 mRecyclerView.setVisibility(View.VISIBLE);
                 mProgressBar.setVisibility(View.INVISIBLE);

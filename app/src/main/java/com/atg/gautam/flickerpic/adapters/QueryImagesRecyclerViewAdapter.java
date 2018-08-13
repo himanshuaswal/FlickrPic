@@ -17,12 +17,12 @@ import java.util.ArrayList;
 
 /*
  ** Created by Gautam Krishnan {@link https://github.com/GautiKrish}
- */public class ImagesRecyclerViewAdapter extends RecyclerView.Adapter<ImagesRecyclerViewAdapter.ImagesViewHolder> {
+ */public class QueryImagesRecyclerViewAdapter extends RecyclerView.Adapter<QueryImagesRecyclerViewAdapter.ImagesViewHolder> {
     private Context mContext;
     private ArrayList<String> mImageURLArrayList;
     private ArrayList<String> mImageIdArrayList;
 
-    public ImagesRecyclerViewAdapter(Context mContext, ArrayList<String> mImageURLArrayList, ArrayList<String> mImageIdArrayList) {
+    public QueryImagesRecyclerViewAdapter(Context mContext, ArrayList<String> mImageURLArrayList, ArrayList<String> mImageIdArrayList) {
         this.mContext = mContext;
         this.mImageURLArrayList = mImageURLArrayList;
         this.mImageIdArrayList = mImageIdArrayList;
@@ -32,7 +32,7 @@ import java.util.ArrayList;
     @NonNull
     @Override
     public ImagesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View rvView = LayoutInflater.from(mContext).inflate(R.layout.activity_rv_image_item, parent, false);
+        View rvView = LayoutInflater.from(mContext).inflate(R.layout.activity_rv_query_image_item, parent, false);
         return new ImagesViewHolder(rvView);
 
     }
@@ -49,7 +49,7 @@ import java.util.ArrayList;
 
     @Override
     public int getItemCount() {
-        if(mImageIdArrayList!=null)
+        if (mImageIdArrayList != null)
             return mImageIdArrayList.size();
         else
             return 0;
@@ -61,9 +61,10 @@ import java.util.ArrayList;
 
         public ImagesViewHolder(View itemView) {
             super(itemView);
-            mImageView = itemView.findViewById(R.id.flickr_thumbnail_iv);
-            mTextView = itemView.findViewById(R.id.image_id);
+            mImageView = itemView.findViewById(R.id.flickr_query_thumbnail_iv);
+            mTextView = itemView.findViewById(R.id.query_image_id);
 
         }
     }
+
 }

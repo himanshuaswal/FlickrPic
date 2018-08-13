@@ -15,5 +15,6 @@ import retrofit2.http.Query;
 
     @GET("rest")
     Call<FlickrResponse> getImages(@Query("method") String methodName, @Query("api_key") String API_KEY, @Query("format") String format, @Query("nojsoncallback") int value, @Query("extras") String urlS);
-
+    @GET("rest")
+    Call<FlickrResponse> getSearchQueryImages(@Query("method") String methodName, @Query("api_key") String API_KEY, @Query("format") String format, @Query("nojsoncallback") int value, @Query("extras") String urlS,@Query("text") String userSearchText);
 }

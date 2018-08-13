@@ -4,13 +4,13 @@
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_recent_images"
+        android:id="@+id/rv_query_images"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"/>
 
     <ProgressBar
-        android:id="@+id/loading_recent_indicator"
+        android:id="@+id/loading_query_indicator"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_gravity="center"
