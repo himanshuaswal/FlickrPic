@@ -30,10 +30,11 @@ public class MainActivity extends AppCompatActivity {
                 .setBackgroundColor(android.R.color.holo_orange_dark)
                 .setTitle("App developed by Gautam Krishnan")
                 .show();
+        RecentFragment mRecentFragment = new RecentFragment();
+        mFragmentManager.beginTransaction().replace(R.id.fragment_container, mRecentFragment).commit();
         mBottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.recent_images:
-                    RecentFragment mRecentFragment = new RecentFragment();
                     mFragmentManager.beginTransaction().replace(R.id.fragment_container, mRecentFragment).commit();
                     break;
                 case R.id.search_images:
