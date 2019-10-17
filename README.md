@@ -1,5 +1,6 @@
 # FlickerPic
 An android gallery app which shows recent images from flickr and also allows users to search for images.
+Feedbacks are appreciated.
 # Screenshots
 
 ![screen0](https://user-images.githubusercontent.com/20628833/44055023-c91ea00a-9f61-11e8-8c49-5ef64c9d9b4e.png)
